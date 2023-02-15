@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.3.2/dist/aframe-environment-component.min.js"></script>
+
+  </head>
+  <body>
+    <a-scene gltf-model="dracoDecoderPath: https://www.gstatic.com/draco/v1/decoders/;
+    meshoptDecoderPath: https://unpkg.com/meshoptimizer@0.16.0/meshopt_decoder.js;">
+        <a-asset-item id="car" src =" https://market-assets.fra1.cdn.digitaloceanspaces.com/market-assets/models/sports-sedan/model.gltf"></a-asset-item>
+        <a-asset-item id="library" src =" https://market-assets.fra1.cdn.digitaloceanspaces.com/market-assets/models/house-7/model.gltf"></a-asset-item>
+        <a-asset-item id="house" src =" https://market-assets.fra1.cdn.digitaloceanspaces.com/market-assets/models/house-5/model.gltf"></a-asset-item>
+        <a-asset-item id="house1" src =" https://market-assets.fra1.cdn.digitaloceanspaces.com/market-assets/models/house-3/model.gltf"></a-asset-item>
+        <a-asset-item id="man" src =" https://market-assets.fra1.cdn.digitaloceanspaces.com/market-assets/models/male/model.gltf"></a-asset-item>
+        <a-asset-item id="bear" src =" https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/bear/model.gltf"></a-asset-item>
+        <a-asset-item id="helicopter" src ="https://market-assets.fra1.cdn.digitaloceanspaces.com/market-assets/models/helicopter/model.gltf"></a-asset-item>
+
+
+        <a-entity environment="preset: forest ;"></a-entity>
+
+        <a-entity gltf-model="#library" position="0 0 -20" scale=" 9 9 9"> </a-entity>
+        <a-entity gltf-model="#house" position="-20 0 -20" scale=" 9 9 9"> </a-entity>
+        <a-entity gltf-model="#house1" position="20 0 -20" scale=" 9 9 9"> </a-entity>
+        <a-entity gltf-model="#car" position="3 0 -20"  ></a-entity>
+        <a-entity gltf-model="#man" position="0 0 -10"  ></a-entity>
+        <a-entity gltf-model="#helicopter" position="3 5 -20" rotation="0 0 0"  ></a-entity>
+    </a-scene>
+  </body>
+</html>
