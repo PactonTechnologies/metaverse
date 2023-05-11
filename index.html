@@ -1,110 +1,94 @@
 <!DOCTYPE html>
+<html>
 <head>
-    <title>Video</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <title>Virtual School</title>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
 </head>
-
 <body>
-    <video id="video" playsinline></video>
-    <canvas id="canvas"></canvas>
-    
-    <button id="start-recording">Start Recording</button>
-    <button id="stop-recording">Stop Recording</button>
-    
-    <select id="filter-select">
-      <option value="">No filter</option>
-      <option value="grayscale(100%)">Grayscale</option>
-      <option value="sepia(100%)">Sepia</option>
-      <option value="hue-rotate(90deg)">Hue Rotate</option>
-      <option value="invert(100%)">Invert</option>
-      <option value="brightness(150%)">Brightness</option>
-      <option value="saturate(200%)">Saturate</option>
-      <option value="contrast(200%)">Contrast</option>
-      <option value="contrast(200%) sepia(50%) saturate(150%)">Valencia</option>
-      <option value="brightness(110%) contrast(90%) saturate(85%)">Clarendon</option>
-      <option value="brightness(120%) contrast(75%) saturate(120%) hue-rotate(15deg)">Nashville</option>
-      <option value="brightness(125%) contrast(125%)">Gingham</option>
-      <option value="brightness(115%) contrast(90%) hue-rotate(-10deg) saturate(150%)">Lark</option>
-    </select>
+  <a-scene>
+    <!-- School building -->
+    <a-box position="0 5 -20" width="30" height="10" depth="0.2" color="pink"></a-box>
+    <a-box position="-15 5 0" width="0.2" height="10" depth="40" color="pink"></a-box>
+    <a-box position="15 5 0" width="0.2" height="10" depth="40" color="pink"></a-box>
 
+    <!-- Classroom -->
+    <a-entity position="0 0 -5">
+      <a-box position="0 3 -5" width="10" height="6" depth="0.2" color="white"></a-box>
+      <a-box position="-4 3 0" width="0.2" height="6" depth="10" color="white"></a-box>
+      <a-box position="4 3 0" width="0.2" height="6" depth="10" color="white"></a-box>
 
+      <!-- Floor and ceiling -->
+      <a-plane position="0 0 0" rotation="-90 0 0" width="10" height="10" color="gray"></a-plane>
+      <a-plane position="0 6 0" rotation="90 0 0" width="10" height="10" color="white"></a-plane>
 
+      <!-- Teacher's desk -->
+      <a-box position="0 1.5 -4" width="2" height="0.5" depth="1" color="brown"></a-box>
+      <a-box position="0 2 -3.5" width="1" height="1" depth="0.5" color="brown"></a-box>
+
+      <!-- Student desks -->
+      <a-box position="-2.5 1.5 -2" width="1" height="0.5" depth="1" color="blue"></a-box>
+      <a-box position="-1.5 1.5 -2" width="1" height="0.5" depth="1" color="blue"></a-box>
+      <a-box position="-0.5 1.5 -2" width="1" height="0.5" depth="1" color="blue"></a-box>
+      <a-box position="0.5 1.5 -2" width="1" height="0.5" depth="1" color="blue"></a-box>
+      <a-box position="1.5 1.5 -2" width="1" height="0.5" depth="1" color="blue"></a-box>
+
+      <!-- Screen for PowerPoint -->
+      <a-plane position="0 3.5 -4.01" width="4" height="2.5" color="black"></a-plane>
+      <a-entity id="powerpoint" geometry="primitive: plane; width: 3.8; height: 2.4" material="src: path/to/powerpoint.jpg" position="0 3.5 -4.01"></a-entity>
+
+      <!-- VR camera -->
+      <a-entity id="cameraRig" position="0 1.6 0">
+        <a-entity camera look-controls>
+          <a-cursor
+            id="cursor"
+            raycaster="objects: .clickable"
+            fuse="true"
+            fuse-timeout="1500"
+            cursor="fuse: true; fuseTimeout: 1500"
+            position="0 0 -1"
+            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+            material="color: black; shader: flat"
+          ></a-cursor>
+        </a-entity>
+      </a-entity>
+
+      <!-- People sitting in the classroom -->
+      <a-entity id="student1" position="-2.5 1.5 -1.5">
+        <a-box width="0.4" height="0.8" depth="0.4" color="red"></a-box>
+      </a-entity>
+      <a-entity id="student2" position="-1.5 1.5 -1.5">
+        <a-box width="0.4" height="0.8" depth="0.4" color="green"></a-box>
+      </a-entity>
+      <!-- Add more student entities as needed -->
+
+      <!-- ChatGPT-powered teacher -->
+      <a-entity id="teacher" position="0 1.5 -3">
+        <a-box width="0.6" height="1.2" depth="0.4" color="purple"></a-box>
+      </a-entity>
+
+      <!-- Interaction with the teacher -->
+      <a-entity id="teacherText" position="0 2.2 -3" text="value: Hello! How can I help you?; align: center; width: 3;"></a-entity>
+
+      <!-- Event listener for interaction -->
+      <script>
+        document.querySelector('#cursor').addEventListener('click', function () {
+          var distance = document.querySelector('#cameraRig').object3D.position.distanceTo(document.querySelector('#teacher').object3D.position);
+
+          if (distance < 2) {
+            // Simulating ChatGPT response
+            var question = prompt('Ask a question:');
+            var answer = 'I am an AI-powered teacher. Ask me anything!';
+            // Call your ChatGPT API or function here to get the answer based on the question
+            // Replace the answer variable with the actual response from ChatGPT
+
+            document.querySelector('#teacherText').setAttribute('text', 'value: ' + answer + '; align: center; width: 3;');
+          }
+        });
+      </script>
+    </a-entity>
+  </a-scene>
 </body>
+</html>
 
 
-
-
-
-<script>
-  // Use the DOMContentLoaded event listener to ensure that the code is executed only after the DOM has fully loaded
-  document.addEventListener('DOMContentLoaded', () => {
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
-    
-    // Define the available filters
-    const filters = {
-      'grayscale': 1,
-      'sepia': 1,
-      'hue-rotate': '90deg',
-      'invert': 1,
-      'brightness': '150%',
-      'saturate': '200%',
-      'contrast': '200%',
-      'valencia': 'contrast(200%) sepia(50%) saturate(150%)',
-      'clarendon': 'brightness(110%) contrast(90%) saturate(85%)',
-      'nashville': 'brightness(120%) contrast(75%) saturate(120%) hue-rotate(15deg)',
-      'gingham': 'brightness(125%) contrast(125%)',
-      'lark': 'brightness(115%) contrast(90%) hue-rotate(-10deg) saturate(150%)'
-    };
-
-    if (video) {
-      navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-        .then(stream => {
-          video.srcObject = stream;
-          video.play();
-
-          const mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
-
-          // Add event listener for data available
-          mediaRecorder.addEventListener('dataavailable', event => {
-            const blob = new Blob([event.data], { type: 'video/webm' });
-
-            // Do something with the recorded video, such as uploading to a server or displaying to the user
-          });
-
-          // Start recording when the user clicks a button
-          document.getElementById('start-recording').addEventListener('click', () => {
-            mediaRecorder.start();
-          });
-
-          // Stop recording when the user clicks a button
-          document.getElementById('stop-recording').addEventListener('click', () => {
-            mediaRecorder.stop();
-            });
-  
-                  // Apply the selected filter to the video stream
-      const applyFilter = () => {
-        const selectedFilter = document.getElementById('filter-select').value;
-        video.style.filter = selectedFilter;
-      };
-
-      // Listen for changes to the filter selection and apply the selected filter
-      document.getElementById('filter-select').addEventListener('change', applyFilter);
-
-      // Draw the current video frame to the canvas and apply the selected filter
-      const drawFrame = () => {
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        const selectedFilter = document.getElementById('filter-select').value;
-        ctx.filter = selectedFilter;
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        requestAnimationFrame(drawFrame);
-      };
-      requestAnimationFrame(drawFrame);
-    });
-} else {
-  console.error("Could not find video element in DOM.");
-}
-
-    });
-  </script>
