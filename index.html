@@ -37,9 +37,6 @@
 
       <!-- Screen for PowerPoint -->
       <a-plane position="0 3.5 -4.01" width="4" height="2.5" color="black"></a-plane>
-      <a-entity id="powerpoint" geometry="primitive: plane; width: 3.8; height: 2
-      <!-- Screen for PowerPoint -->
-      <a-plane position="0 3.5 -4.01" width="4" height="2.5" color="black"></a-plane>
       <a-entity id="powerpoint" geometry="primitive: plane; width: 3.8; height: 2.4" material="src: path/to/powerpoint.jpg" position="0 3.5 -4.01"></a-entity>
 
       <!-- VR camera -->
@@ -48,18 +45,15 @@
       </a-entity>
 
       <!-- People sitting in the classroom -->
-      <a-entity id="student1" position="-2.5 1.5 -1.5" mixin="character"></a-entity>
-      <a-entity id="student2" position="-1.5 1.5 -1.5" mixin="character"></a-entity>
+      <a-entity id="student1" gltf-model="path/to/student1.glb" position="-2.5 1.5 -1.5" scale="0.1 0.1 0.1"></a-entity>
+      <a-entity id="student2" gltf-model="path/to/student2.glb" position="-1.5 1.5 -1.5" scale="0.1 0.1 0.1"></a-entity>
       <!-- Add more student entities as needed -->
 
       <!-- ChatGPT-powered teacher -->
-      <a-entity id="teacher" position="0 1.5 -3" mixin="character"></a-entity>
+      <a-entity id="teacher" gltf-model="path/to/teacher.glb" position="0 1.5 -3" scale="0.1 0.1 0.1"></a-entity>
 
       <!-- Interaction with the teacher -->
       <a-entity id="teacherText" position="0 2.2 -3" text="value: Hello! How can I help you?; align: center; width: 3;"></a-entity>
-
-      <!-- Character mixin -->
-      <a-mixin id="character" geometry="primitive: box; width: 0.4; height: 0.8; depth: 0.4" material="color: red"></a-mixin>
 
       <!-- Event listener for interaction -->
       <script>
